@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <title>Business Name Reservation form</title>
+
+    <!-- Bootstrap -->
+    <link href="bootstrap3/css/bootstrap.min.css" rel="stylesheet">
+	<link href="assets/css/custom.css" rel="stylesheet">
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+  </head>
+  <body>	
+	    <div class="container nres">
+		
+		<h2>Business Name Reservation</h2>
+		<br />
+		
+		<form class="form" ng-app="NameReserve" ng-controller="NameReserveCtrl">
+			<div class="form-group">
+				<label for="entity_type">Entity Type:</label>
+				<select class="form-control" id="entity_type">
+					<option></option>
+					<option>Company</option>		
+				</select>
+			</div>
+			<div class="form-group">
+				<label for="reserve_period">Reservation Period</label>
+				<select class="form-control" id="reserve_period">
+					<option></option>
+					<option>2 days</option>
+					<option>90 days</option>
+				</select>
+			</div>
+			
+			<div class="form-group">
+				<label for="first_name" >Primary Name Choice</label>
+				<input type="text" ng-change="myConcat()" ng-model="fname" class="form-control" id="first_name">
+			</div>
+			
+			<div class="form-group">
+				<label for="second_name">Secondary Name Choice:</label>
+				<input type="text" ng-change="myConcat2()" ng-model="secondname" class="form-control" id="second_name">
+			</div>
+			
+			<div class="form-group">
+				<label for="third_name">Tertiary Name Choice:</label>
+				<input type="text" ng-change="myConcat3()" ng-model="thirdname" class="form-control" id="third_name">
+			</div>
+			
+			<div class="form-group">
+				<p>Cannot find your specific nature selection? Use this file for assistance.</p>
+			</div>
+			
+			<div class="form-group">
+				<label for="nat_cat">Nature Category:</label>
+				<select class="form-control" id="nat_cat">
+					<option selected="selected" value="">Select a nature category</option>
+					<option value="1">Accounting, Book-Keeping and Auditing activities; Tax Consultancy</option>
+					<option value="2">Activities Auxiliary to Financial Intermediation n.e.c.</option>
+					<option value="3">Activities Auxiliary to Insurance and Pension Funding</option>
+					<option value="4">Activities of Business and Employers Organizations</option>
+					<option value="5">Activities of Political Organizations</option>
+					<option value="6">Activities of Professional Organizations</option>
+					<option value="7">Activities of Religious Organizations</option>
+					<option value="8">Activities of Trade Unions</option>
+					<option value="9">Activities of Travel Agencies and Tour Operators; Tourist Assistance Activities n.e.c.</option>
+					<option value="10">Activities of other Membership Organizations n.e.c. excl. the Activities of Sports and Games 
+
+			</select>
+					
+				</select>
+			</div>
+
+
+			<div ng-if="showFirstName" class="form-group">
+			<p>1st Name Choice</p>	<p> <a href ng-click="showPopup()"  {{finalname}}>{{finalname}}</a> </p>
+			</div>
+			
+			<div ng-if="showSecondName" class="form-group">
+			<p>2nd Name Choice</p>	<p> <a href ng-click="showPopup()"  {{finalname2}}>{{finalname2}}</a> </p>
+			</div>
+			
+			<div ng-if="showThirdName" class="form-group">
+			<p>3rd Name Choice</p>	<p> <a href ng-click="showPopup()"  {{finalname3}}>{{finalname3}}</a> </p>
+			</div>
+			
+			
+			<div style="z-index: 2; visibility: hidden; position: relative; width: 100%; border-style: initial; border: 2px dashed blue; padding: 10px 10%" id="divPopup">
+					  <button style="float:right;" type="button" ng-click="closePopupNames()">x</button>
+					  <br>
+						<table id="ctl00_Space_divTable" cellpadding="10">
+					<tbody><tr>
+						<td>Proprietor,<br>Director,<br>Shareholder:</td>
+						<td colspan="4"><input name="ctl00$Space$txtFirstName" type="text" id="ctl00_Space_txtFirstName" class="mytooltip mytips" data-placement="top" placeholder="First name" style="width:150px;">&nbsp;
+							<input name="ctl00$Space$txtMiddleName" type="text" id="ctl00_Space_txtMiddleName" class="mytooltip mytips" data-placement="top" placeholder="Middle name" style="width:120px;">&nbsp;
+							<input name="ctl00$Space$txtLastName" type="text" id="ctl00_Space_txtLastName" class="mytooltip mytips" data-placement="top" placeholder="Last name" style="width:120px;">&nbsp;
+							<input name="ctl00$Space$relation" type="text" id="ctl00_Space_relation" class="mytooltip mytips" data-placement="top" placeholder="Relation to name" style="width:120px;">&nbsp;
+							<input type="button" name="ctl00$Space$pplAddButton" value="Add" onclick="javascript:__doPostBack('ctl00$Space$pplAddButton','')" id="ctl00_Space_pplAddButton" class="btn btn-sm btn-start">
+							<input type="button" name="ctl00$Space$pplRemoveButton" value="Remove" onclick="javascript:__doPostBack('ctl00$Space$pplRemoveButton','')" id="ctl00_Space_pplRemoveButton" class="btn btn-sm btn-clear"><br>
+							<select size="4" name="ctl00$Space$pplListBox" id="ctl00_Space_pplListBox" style="color:Black;font-weight:bold;width:720px;">
+
+								</select></td>
+							</tr>
+						</tbody></table>
+
+					  <br>
+			</div>
+			
+			
+			<div class="form-group">
+				<label for=""></label>
+				<input type="" class="form-control" id="">
+			</div>
+
+			<div class="form-group">
+				<label for=""></label>
+				<input type="" class="form-control" id="">
+			</div>
+			
+		</form>
+		
+		
+		
+		</div>
+	<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="bootstrap3/js/bootstrap.min.js"></script>
+	<script src="assets/js/angular.min.js"></script>
+	<script src="assets/js/ebrf.js"></script>
+	
+  </body>
+</html>
